@@ -1,3 +1,22 @@
+//    erdi8 - a unique identifier scheme and identifier generator and transformer that
+//    operates on the base-36 alphabet without [0, 1, and l]
+//
+//    Copyright (C) 2023  Andreas Thalhammer
+//
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
 class Erdi8 {
 	private OFFSET = 8;
 	private UNSAFE: string = "aeiou"
@@ -8,9 +27,9 @@ class Erdi8 {
 
 	public constructor(safe: boolean = false) {
 		if (safe = true) {
-			var alph2 = "";
-			this.alph.split("").forEach((elem) => { if (!this.UNSAFE.split("").includes(elem)) { alph2 = alph2 + elem } });
-			this.alph = alph2;
+			var tempAlph = "";
+			this.alph.split("").forEach((elem) => { if (!this.UNSAFE.split("").includes(elem)) { tempAlph = tempAlph + elem } });
+			this.alph = tempAlph;
 			this.safe = true;
 		}
 	}
