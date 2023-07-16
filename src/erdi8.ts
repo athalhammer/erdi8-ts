@@ -33,7 +33,7 @@ class Erdi8 {
 		return flag;
 	}
 
-	public increment(input: string): any {
+	public increment(input: string): string {
 		if (!this.check(input)) {
 			return "";
 		}
@@ -57,7 +57,7 @@ class Erdi8 {
 		return current.join("");
 	}
 
-	public encode_int(div: number): string {
+	public encodeInt(div: number): string {
 		var result = "";
 		var mod = div % this.alph.length;
 		div = Math.floor(div / this.alph.length);
@@ -86,7 +86,7 @@ class Erdi8 {
 		}
 	}
 
-	public decode_int(input: string): number {
+	public decodeInt(input: string): number {
 		if (!this.check(input)) {
 			return 0;
 		}
@@ -103,23 +103,39 @@ class Erdi8 {
 		return result - 1;
 	}
 
-	public mod_space(input: number): Array<number> {
-
-		var min = this.decode_int(this.alph[this.alph.length - 1].repeat(input - 1)) + 1;
-		var max = this.decode_int(this.alph[this.alph.length - 1].repeat(input));
+	public modSpace(input: number): Array<number> {
+		var min = this.decodeInt(this.alph[this.alph.length - 1].repeat(input - 1)) + 1;
+		var max = this.decodeInt(this.alph[this.alph.length - 1].repeat(input));
 		var space = max - min + 1;
 		return [min, max, space];
 	}
 
-	public increment_fancy(input: string, stride: number): string {
+	public incrementFancy(input: string, stride: number): string {
 		if (!this.check(input)) {
 			return "";
 		}
-		var mod_space = this.mod_space(input.length);
-		while (this.gcd(mod_space[0] + stride, mod_space[2]) != 1) {
+		var modSpace = this.modSpace(input.length);
+		while (this.gcd(modSpace[0] + stride, modSpace[2]) != 1) {
 			stride = stride + 1;
 		}
-		return this.encode_int(mod_space[0] + (this.decode_int(input) + stride) % mod_space[2]);
+		return this.encodeInt(modSpace[0] + (this.decodeInt(input) + stride) % modSpace[2]);
 	}
 
+	public computeStride(input: string, output: string): number {
+		if (!this.check(input) || !this.check(output)) {
+			return 0;
+		}
+		var modSpace = this.modSpace(input.length);
+		var inputInt = this.decodeInt(input);
+		var outputInt = this.decodeInt(output);
+		var result = outputInt - inputInt - modSpace[0];
+		while (result < 0) {
+			result = result + modSpace[2];
+		}
+		if (this.gcd(modSpace[0] + result, modSpace[2]) != 1) {
+			console.error("Error: No stride found");
+			return 0;
+		}
+		return result;
+	}
 }
