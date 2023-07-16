@@ -34,29 +34,29 @@ class Erdi8 {
 		}
 	}
 
-	public check(input: string): boolean {
-		if (input.length == 0) {
+	public check(erdi8: string): boolean {
+		if (erdi8.length == 0) {
 			return true;
 		}
 		var flag = true;
-		flag = !this.alph.substring(0, this.OFFSET).split("").includes(input[0]);
+		flag = !this.alph.substring(0, this.OFFSET).split("").includes(erdi8[0]);
 		if (!flag) {
-			console.error("Error: Not a valid erdi8 string, starts with " + input[0]);
+			console.error("Error: Not a valid erdi8 string, starts with " + erdi8[0]);
 		}
-		for (var i = 0; i < input.length; i++) {
-			if (!this.alph.split("").includes(input[i])) {
+		for (var i = 0; i < erdi8.length; i++) {
+			if (!this.alph.split("").includes(erdi8[i])) {
 				flag = false;
-				console.error("Error: Detected unknown character: " + input[i] + "; allowed are the following: " + this.alph);
+				console.error("Error: Detected unknown character: " + erdi8[i] + "; allowed are the following: " + this.alph);
 			}
 		}
 		return flag;
 	}
 
-	public increment(input: string): string {
-		if (!this.check(input)) {
+	public increment(erdi8: string): string {
+		if (!this.check(erdi8)) {
 			return "";
 		}
-		var current = input.split("");
+		var current = erdi8.split("");
 		var carry = true;
 		var count = 1;
 		while (carry == true) {
@@ -105,15 +105,15 @@ class Erdi8 {
 		}
 	}
 
-	public decodeInt(input: string): number {
-		if (!this.check(input)) {
+	public decodeInt(erdi8: string): number {
+		if (!this.check(erdi8)) {
 			return 0;
 		}
 		var result = 0;
 		var count = 0;
-		while (input.length > 0) {
-			var tail = input[input.length - 1];
-			input = input.substring(0, input.length - 1);
+		while (erdi8.length > 0) {
+			var tail = erdi8[erdi8.length - 1];
+			erdi8 = erdi8.substring(0, erdi8.length - 1);
 			var pos = this.alph.indexOf(tail) + 1;
 			result = result + pos * Math.pow(this.alph.length, count) -
 				this.OFFSET * Math.pow(this.alph.length, count);
@@ -122,37 +122,37 @@ class Erdi8 {
 		return result - 1;
 	}
 
-	public modSpace(input: number): Array<number> {
-		var min = this.decodeInt(this.alph[this.alph.length - 1].repeat(input - 1)) + 1;
-		var max = this.decodeInt(this.alph[this.alph.length - 1].repeat(input));
+	public modSpace(length: number): Array<number> {
+		var min = this.decodeInt(this.alph[this.alph.length - 1].repeat(length - 1)) + 1;
+		var max = this.decodeInt(this.alph[this.alph.length - 1].repeat(length));
 		var space = max - min + 1;
 		return [min, max, space];
 	}
 
-	public incrementFancy(input: string, stride: number): string {
-		if (!this.check(input)) {
+	public incrementFancy(erdi8: string, stride: number): string {
+		if (!this.check(erdi8)) {
 			return "";
 		}
-		var modSpace = this.modSpace(input.length);
+		var modSpace = this.modSpace(erdi8.length);
 		while (this.gcd(modSpace[0] + stride, modSpace[2]) != 1) {
 			stride = stride + 1;
 		}
-		return this.encodeInt(modSpace[0] + (this.decodeInt(input) + stride) % modSpace[2]);
+		return this.encodeInt(modSpace[0] + (this.decodeInt(erdi8) + stride) % modSpace[2]);
 	}
 
-	public computeStride(input: string, output: string): Object {
-		if (!this.check(input) || !this.check(output)) {
+	public computeStride(erdi8: string, nextErdi8: string): Object {
+		if (!this.check(erdi8) || !this.check(nextErdi8)) {
 			return 0;
 		}
-		var modSpace = this.modSpace(input.length);
-		var inputInt = this.decodeInt(input);
-		var outputInt = this.decodeInt(output);
+		var modSpace = this.modSpace(erdi8.length);
+		var inputInt = this.decodeInt(erdi8);
+		var outputInt = this.decodeInt(nextErdi8);
 		var result = outputInt - inputInt - modSpace[0];
 		while (result < 0) {
 			result = result + modSpace[2];
 		}
 		if (this.gcd(modSpace[0] + result, modSpace[2]) != 1) {
-			console.error("Error: No stride found");
+			console.error("Error: Stride is not coprime to the modulus space.");
 			return 0;
 		}
 		var candidates = [];
