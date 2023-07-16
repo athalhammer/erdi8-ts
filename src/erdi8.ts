@@ -121,7 +121,7 @@ class Erdi8 {
 		return this.encodeInt(modSpace[0] + (this.decodeInt(input) + stride) % modSpace[2]);
 	}
 
-	public computeStride(input: string, output: string): number {
+	public computeStride(input: string, output: string): Object {
 		if (!this.check(input) || !this.check(output)) {
 			return 0;
 		}
@@ -136,6 +136,12 @@ class Erdi8 {
 			console.error("Error: No stride found");
 			return 0;
 		}
-		return result;
+		var candidates = [];
+		var stride = result - 1;
+		while (this.gcd(modSpace[0] + stride, modSpace[2]) != 1) {
+			candidates.push(stride);
+			stride = stride - 1;
+		}
+		return { "stride_effective": result, "stride_other_candidates": candidates };
 	}
 }
