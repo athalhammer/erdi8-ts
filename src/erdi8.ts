@@ -26,7 +26,7 @@ class Erdi8 {
 
 
 	public constructor(safe: boolean = false) {
-		if (safe = true) {
+		if (safe == true) {
 			var tempAlph = "";
 			this.alph.split("").forEach((elem) => { if (!this.UNSAFE.split("").includes(elem)) { tempAlph = tempAlph + elem } });
 			this.alph = tempAlph;
