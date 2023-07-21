@@ -22,7 +22,6 @@ class Erdi8 {
 	private UNSAFE: string = "aeiou"
 
 	private alph: string = "23456789abcdefghijkmnopqrstuvwxyz";
-	private safe: boolean = false;
 
 
 	public constructor(safe: boolean = false) {
@@ -30,7 +29,6 @@ class Erdi8 {
 			var tempAlph = "";
 			this.alph.split("").forEach((elem) => { if (!this.UNSAFE.split("").includes(elem)) { tempAlph = tempAlph + elem } });
 			this.alph = tempAlph;
-			this.safe = true;
 		}
 	}
 
