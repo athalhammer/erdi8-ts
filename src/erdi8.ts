@@ -42,12 +42,14 @@ class Erdi8 {
 			return true;
 		}
 		var flag = true;
-		flag = !this.alph.substring(0, this.OFFSET).split("").includes(erdi8[0]);
+		flag = ! (this.alph.substring(0, this.OFFSET).split("").indexOf(erdi8[0]) >= 0);
+		//flag = !this.alph.substring(0, this.OFFSET).split("").includes(erdi8[0]);
 		if (!flag) {
 			console.error("Error: Not a valid erdi8 string, starts with " + erdi8[0]);
 		}
 		for (var i = 0; i < erdi8.length; i++) {
-			if (!this.alph.split("").includes(erdi8[i])) {
+			if (! (this.alph.split("").indexOf(erdi8[i]) >= 0)) {
+			//if (!this.alph.split("").includes(erdi8[i])) {
 				flag = false;
 				console.error("Error: Detected unknown character: " + erdi8[i] + "; allowed are the following: " + this.alph);
 			}
