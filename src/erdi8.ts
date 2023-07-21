@@ -27,7 +27,12 @@ class Erdi8 {
 	public constructor(safe: boolean = false) {
 		if (safe == true) {
 			var tempAlph = "";
-			this.alph.split("").forEach((elem) => { if (!this.UNSAFE.split("").includes(elem)) { tempAlph = tempAlph + elem } });
+			for (var i = 0; i < this.alph.length; i++) {
+				if (! (this.UNSAFE.indexOf(this.alph[i]) >= 0)) {
+					tempAlph = tempAlph +  this.alph[i];
+				}
+			}
+			//this.alph.split("").forEach((elem) => { if (!this.UNSAFE.split("").includes(elem)) { tempAlph = tempAlph + elem } });
 			this.alph = tempAlph;
 		}
 	}
