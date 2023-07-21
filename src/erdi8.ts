@@ -17,7 +17,7 @@
 //    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-class Erdi8 {
+export class Erdi8 {
 	private OFFSET = 8;
 	private UNSAFE: string = "aeiou"
 
