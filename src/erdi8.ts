@@ -129,6 +129,23 @@ class Erdi8 {
 		return [min, max, space];
 	}
 
+	public encodeFourBytes(bytes: Uint8Array): string {
+		if (bytes.length != 4) {
+			console.error("Error: Input must be exactly four bytes long.");
+			return "";
+		} else {
+			// type check
+			for (var i = 0; i < bytes.length; i++) {
+				if (!Number.isInteger(bytes[i]) && bytes[i] >= 0 && bytes[i] <= 255) {
+					console.error("Error: Input must be an array of integers.");
+					return "";
+				}
+			}
+			var view = new DataView(bytes.buffer);
+			return this.encodeInt(view.getUint32(0) + this.decodeInt("zzzzzz") + 1);
+		}
+	}
+
 	public incrementFancy(erdi8: string, stride: number): string {
 		if (!this.check(erdi8)) {
 			return "";
