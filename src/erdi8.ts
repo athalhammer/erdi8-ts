@@ -151,22 +151,17 @@ export class Erdi8 {
 		}
 	}
 
-	// made this compatible to String.fromCharCode function --> returns number array
-	public decodeFourBytes(erdi8: string): Array<number> {
+	public decodeFourBytes(erdi8: string): Uint8Array {
 		if (!this.check(erdi8)) {
-			return new Array<number>();
+			return new Uint8Array();
 		}
 		if (erdi8.length == 7) {
 			var view = new DataView(new ArrayBuffer(4));
 			view.setUint32(0, this.decodeInt(erdi8) - this.decodeInt("zzzzzz") - 1);
-			var result = new Array<number>();
-			for (var i = 0; i < 4; i++) {
-				result.push(view.getUint8(i));
-			}
-			return result;
+			return new Uint8Array(view.buffer);
 		} else {
 			console.error("Error: Input must be exactly seven characters long.");
-			return new Array<number>();
+			return new Uint8Array();
 		}
 	}
 
