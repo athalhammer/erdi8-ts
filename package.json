@@ -1,8 +1,8 @@
 {
   "name": "erdi8",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Count according to lower case alphabet and numbers (without ambiguous 0, 1, and l) and always start with a letter",
-  "main": "erdi8.js",
+  "main": "dist/lib/erdi8.js",
   "directories": {
     "test": "test"
   },
