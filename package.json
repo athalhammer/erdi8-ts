@@ -1,6 +1,6 @@
 {
   "name": "erdi8",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Count according to lower case alphabet and numbers (without ambiguous 0, 1, and l) and always start with a letter",
   "main": "erdi8.js",
   "directories": {
