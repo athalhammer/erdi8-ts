@@ -1,0 +1,6 @@
+.vscode
+erdi8-ts.code-workspace
+erdi8.js
+node_modules/
+package-lock.json
+types/

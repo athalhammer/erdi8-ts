@@ -1,2 +1,4 @@
 .vscode
 erdi8-ts.code-workspace
+test
+jest.config.ts

@@ -1,8 +1,8 @@
 {
   "name": "erdi8",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "description": "Count according to lower case alphabet and numbers (without ambiguous 0, 1, and l) and always start with a letter",
-  "main": "dist/lib/erdi8.js",
+  "main": "erdi8.js",
   "directories": {
     "test": "test"
   },
@@ -31,5 +31,5 @@
   "bugs": {
     "url": "https://github.com/athalhammer/erdi8-ts/issues"
   },
-  "homepage": "https://github.com/athalhammer/erdi8-ts"
+  "homepage": "https://github.com/athalhammer/erdi8-ts#readme"
 }
