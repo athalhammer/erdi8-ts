@@ -1,11 +1,12 @@
 {
   "name": "erdi8",
-  "version": "0.1.0",
+  "version": "0.2.2",
   "description": "Count according to lower case alphabet and numbers (without ambiguous 0, 1, and l) and always start with a letter",
   "main": "erdi8.js",
   "directories": {
     "test": "test"
   },
+  "types": "./types/erdi8.d.ts",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
