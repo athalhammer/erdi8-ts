@@ -1,6 +1,6 @@
 // unit tests for erdi8.ts
 
-import { Erdi8 } from "../src/erdi8";
+import { Erdi8 } from "../erdi8";
 import * as fs from "fs";
 import * as path from "path";
 
