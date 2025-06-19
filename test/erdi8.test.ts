@@ -43,4 +43,9 @@ describe('testing erdi8', () => {
         }
     });
 
+    test('split modspace', () => {
+        var e8 = new Erdi8();
+        var res = e8.splitFancySpace(4, 4, 4);
+        expect(res).toEqual(["a222", "tkc3", "n5n4", "fox5"]);
+    });
   });

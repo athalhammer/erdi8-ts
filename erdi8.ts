@@ -176,6 +176,24 @@ export class Erdi8 {
 		return this.encodeInt(modSpace[0] + (this.decodeInt(erdi8) + stride) % modSpace[2]);
 	}
 
+	public splitFancySpace(length: number, stride: number, numberChunks: number): Array<string> {
+		if (length < 1 || stride < 1 || numberChunks < 1) {
+			console.error("Error: Length, stride, and number of chunks must be positive integers.");
+			return [];
+		}
+		var modSpace = this.modSpace(length);
+		var chunkSize = Math.floor(modSpace[2] / numberChunks);
+		while (this.gcd(modSpace[0] + stride, modSpace[2]) != 1) {
+			stride = stride + 1;
+		}
+		var result = [];
+		for (var i = 0; i < numberChunks; i++) {
+			var intValue = modSpace[0] + (chunkSize * i * (modSpace[0] + stride) % modSpace[2]);
+			result.push(this.encodeInt(intValue));
+		}
+		return result;
+	}
+
 	public computeStride(erdi8: string, nextErdi8: string): Object {
 		if (!this.check(erdi8) || !this.check(nextErdi8)) {
 			return 0;
