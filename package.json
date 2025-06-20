@@ -9,7 +9,7 @@
   "types": "./types/erdi8.d.ts",
   "type": "module",
   "scripts": {
-    "test": "jest",
+    "test": "vitest --run",
     "build": "tsc"
   },
   "repository": {
@@ -25,14 +25,13 @@
   "author": "Andreas Thalhammer",
   "license": "GPL-3.0",
   "devDependencies": {
-    "@types/jest": "^30.0.0",
     "@types/node": "^v24.0.3",
-    "ts-jest": "^29.4.0",
+    "vitest": "^3.2.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
   "bugs": {
     "url": "https://github.com/athalhammer/erdi8-ts/issues"
   },
-  "homepage": "https://github.com/athalhammer/erdi8-ts#readme"
+  "homepage": "https://github.com/athalhammer/erdi8-ts"
 }
